@@ -1,7 +1,7 @@
 const { session } = require('../connection/mongoDB');
 const { NotFoundError, BadRequestError } = require('../response/responseMessage');
 const AppSuccess = require('../response/responseProcessor');
-const { registerService } = require('../services/registerService');
+const { registerService } = require('../services');
 
 const register = async (req, res, next) => {
     const transaction = await session;
