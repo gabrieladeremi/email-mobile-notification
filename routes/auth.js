@@ -15,3 +15,5 @@ const { validateSchema } = require('../validation/genericValidation');
 const router = express.Router();
 
 router.post('/register', validateSchema(registerSchema), register);
+
+module.exports = router;

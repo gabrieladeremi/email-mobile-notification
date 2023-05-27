@@ -18,7 +18,6 @@ exports.validateSchema = (schema) => (req, res,next) => {
                 data: null,
             });
         });
-
-        next();
     }
+    next();
 }

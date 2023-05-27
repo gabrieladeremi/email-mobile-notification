@@ -9,6 +9,8 @@ const authRoutes = require('./routes/auth');
 
 const SERVER_CONFIG = require('./utils/env');
 
+const { NotFoundError } = require('./response/responseMessage');
+
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
@@ -33,16 +35,16 @@ app.get('/', (req, res) => {
 });
 
 
-//app.use('/api/auth', authRoutes);
+app.use('/api/v1/auth', authRoutes);
 
-// app.use((req, res, next) => {
-//     throw new NotFoundError(`${req.originalUrl} is not defined`);
-// });
+app.use((req, res, next) => {
+    throw new NotFoundError(`${req.originalUrl} is not defined`);
+});
 
 app.use((error, req, res, next) => {
     const statusCode = error.statusCode || 500;
     const message = error.message || 'Something went wrong, please try again';
-    logger.error(
+    console.log(
       `Request failed with status code: ${statusCode} and message: ${message} at path: ${req.originalUrl}`
     );
     return res.status(statusCode).json({
